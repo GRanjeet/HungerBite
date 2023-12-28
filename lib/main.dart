@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:orderanytime/modules/screens/category_screen.dart';
+import 'package:orderanytime/modules/screens/tabs.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: themeData,
-      home: const CategoryScreen(),
+      home: const Tabs(),
     );
   }
 }
