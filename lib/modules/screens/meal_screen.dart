@@ -4,16 +4,24 @@ import 'package:orderanytime/modules/screens/mealdetail_screen.dart';
 import '../category/meal.dart';
 
 class MealScreen extends StatelessWidget {
-  const MealScreen({Key? key, this.title, required this.meals})
-      : super(key: key);
+  const MealScreen({
+    Key? key,
+    this.title,
+    required this.meals,
+    required this.onTaggleFavorite,
+  }) : super(key: key);
 
   final String? title;
   final List<Meal> meals;
+  final void Function(Meal meal) onTaggleFavorite;
 
   void selectMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MealdetailScreen(meal: meal),
+        builder: (context) => MealdetailScreen(
+          meal: meal,
+          onTaggleFavorite: onTaggleFavorite,
+        ),
       ),
     );
   }
@@ -37,7 +45,7 @@ class MealScreen extends StatelessWidget {
             Text(
               'uh oh... nothing here!',
               style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
             const SizedBox(
@@ -46,7 +54,7 @@ class MealScreen extends StatelessWidget {
             Text(
               'Try selecting a different category',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
           ],

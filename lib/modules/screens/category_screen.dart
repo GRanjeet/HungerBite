@@ -4,11 +4,19 @@ import 'package:orderanytime/modules/data/dummy_data.dart';
 import 'package:orderanytime/modules/screens/meal_screen.dart';
 import 'package:orderanytime/modules/widget/categorygrid.dart';
 
+import '../category/meal.dart';
+
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({Key? key}) : super(key: key);
+  const CategoryScreen(
+      {Key? key, required this.onTaggleFavorite, required this.availableMeals})
+      : super(key: key);
+
+  final void Function(Meal meal) onTaggleFavorite;
+
+  final List<Meal> availableMeals;
 
   void selectCategory(BuildContext context, Category category) {
-    final filteredMeal = dummyMeals
+    final filteredMeal = availableMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
     Navigator.of(context).push(
@@ -16,6 +24,7 @@ class CategoryScreen extends StatelessWidget {
         builder: (ctx) => MealScreen(
           title: category.title,
           meals: filteredMeal,
+          onTaggleFavorite: onTaggleFavorite,
         ),
       ),
     );
